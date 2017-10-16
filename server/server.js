@@ -19,13 +19,7 @@ app.post('/todos',(req, res)=>{//set up a route with app.post to get body data(i
     res.status(400).send(e);
     });
   });
-
-  // todo.save().then((doc)=>{
-  //   res.send(doc);
-  // }, (e) =>{
-  //   res.status(400).send(e);
-  // });
-
+  
 app.listen(3000, () => {
   console.log('started on port 3000');
 });
@@ -39,3 +33,5 @@ app.listen(3000, () => {
 // }, (e) =>{
 //   console.log('Unable to save todo')
 // })
+
+module.exports = {app};
