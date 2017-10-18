@@ -19,7 +19,15 @@ app.post('/todos',(req, res)=>{//set up a route with app.post to get body data(i
     res.status(400).send(e);
     });
   });
-  
+
+app.get('/todos', (req,res)=>{
+  Todo.find().then((todos)=>{
+    res.send({todos})//creates todos object
+  }, (e)=>{
+    res.status(400).send(e);
+  });
+});
+
 app.listen(3000, () => {
   console.log('started on port 3000');
 });
