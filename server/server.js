@@ -46,17 +46,24 @@ app.get('/todos/:id',(req,res) =>{
     res.status(400).send()
 })
 
-  //validate id using is validate
-    //404 - send back empty
 
-  //findByID, look through todo for match to var id
-    //success
-      //if todo - send it back
-      //if no todo - send back 404 with empty body
-    //error
-      //send back 400
+app.delete('/todos/:id', (req,res)=>{
+  var id = req.params.id;// get the id
 
-  //res.send(req.params)//prints out requested params/id
+  if (!ObjectID.isValid(id)){//validate the id -> not valid? return 404
+    return res.status(404).send()
+  }
+
+  Todo.findByIdAndRemove(id).then((todo)=>{//remove todo by id
+    if (!todo){
+      return res.status(404).send();
+    }
+      res.send(todo)//if doc send doc back with 200
+  }).catch((e)=>{
+    return res.status(400).send();  //error? -> 400 empty body
+  });
+});
+
 })//url variables created with [:]
 
 app.listen(port, () => {
