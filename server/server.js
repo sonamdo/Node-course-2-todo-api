@@ -58,7 +58,7 @@ app.delete('/todos/:id', (req,res)=>{
     if (!todo){
       return res.status(404).send();
     }
-      res.send(todo)//if doc send doc back with 200
+      res.send({todo})//if doc send doc back with 200
   }).catch((e)=>{
     return res.status(400).send();  //error? -> 400 empty body
   });
