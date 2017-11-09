@@ -110,7 +110,7 @@ app.post('/users',(req, res) =>{
   var body = _.pick(req.body, ['email', 'password']);
   var user = new User(body);
 
-  user.save().then((user)=>{
+  user.save().then(()=>{
     return user.generateAuthToken();//call function from user.js and create user token
   }).then((token)=>{
     res.header('x-auth', token).send(user);//attaches token to header
@@ -135,7 +135,7 @@ var authenticate =  (req, res, next) =>{
   })
 }
 
-app.get('/users/me', authenticate, (req,res)=>{ 
+app.get('/users/me', authenticate, (req,res)=>{
   res.send(req.user);
 })
 
