@@ -52,6 +52,16 @@ UserSchema.methods.generateAuthToken = function(){//create new instance method w
   });
 }
 
+UserSchema.methods.removeToken = function (token) {
+  var user = this;
+
+  return user.update({
+    $pull: {//mongodb operator which removes items from array that much criteria
+      tokens: {token}//any object which has this property will be removed(the whole object)
+    }
+  })
+};
+
 UserSchema.statics.findByToken = function(token){//create model method
   var User = this;
   var decoded;
